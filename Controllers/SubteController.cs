@@ -20,7 +20,7 @@ namespace proyecto_test.Controllers
         {
             return View();
         }
-        public async Task<ActionResult> ObtenerEstadoSubte()
+        public async Task<ActionResult> ObtenerEstado()
         {
             using(HttpClient client = new HttpClient())
             {
