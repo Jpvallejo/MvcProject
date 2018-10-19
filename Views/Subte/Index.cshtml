@@ -1,0 +1,39 @@
+@{
+    ViewBag.Title = "Estado Subtes";
+}
+
+<table id="tablaEstadoSubte">
+    <thead>
+        <tr>
+            <td>
+                Linea
+            </td>
+            <td>
+                Estado
+            </td>
+            <td>
+                Detalle
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+@section scripts{
+<script>
+    $(document).ready(function () {
+
+        var urlAction = "/Subte/ObtenerEstado";
+        //$.getJSON("https://haysubte.now.sh/api", function (data) {
+        $.getJSON(urlAction, function (data) {
+            $.each(data, function(i, item){
+                var row = "<tr><td>" + i + "</td><td>" + item.status + "</td><td>" + item.text + "</td><td>";
+
+                $("#tablaEstadoSubte").append(row);
+            });
+        });
+
+    });
+</script>
+}
