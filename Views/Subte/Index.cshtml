@@ -2,38 +2,53 @@
     ViewBag.Title = "Estado Subtes";
 }
 
-<table id="tablaEstadoSubte">
-    <thead>
-        <tr>
-            <td>
-                Linea
-            </td>
-            <td>
-                Estado
-            </td>
-            <td>
-                Detalle
-            </td>
-        </tr>
-    </thead>
-    <tbody>
-    </tbody>
-</table>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+
+<div style="margin-top:2%;">
+    <table id="tablaEstadoSubte">
+        <thead>
+            <tr>
+                <td class="tdHeader">
+                    Linea
+                </td>
+                <td class="tdHeader">
+                    Estado
+                </td>
+                <td class="tdHeader">
+                    Detalle
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+
+<style>
+    td {
+        padding: 4%;
+    }
+
+    .tdHeader {
+        font-weight: bold;
+        font-size: medium;
+    }
+</style>
 
 @section scripts{
-<script>
-    $(document).ready(function () {
+    <script>
+        $(document).ready(function () {
 
-        var urlAction = "/Subte/ObtenerEstado";
-        //$.getJSON("https://haysubte.now.sh/api", function (data) {
-        $.getJSON(urlAction, function (data) {
-            $.each(data, function(i, item){
-                var row = "<tr><td>" + i + "</td><td>" + item.status + "</td><td>" + item.text + "</td><td>";
+            var urlAction = "/Subte/ObtenerEstado";
+            //$.getJSON("https://haysubte.now.sh/api", function (data) {
+                $.getJSON(urlAction, function (data) {
+                    $.each(data, function(i, item){
+                        var row = `<tr><td><img src='/images/${i}.png' /></td><td><i class="fas fa-circle" style="${item.status=='normal' ? 'color:green' : 'color:orange'};"></i></td><td>${item.text}</td><td>`;
 
-                $("#tablaEstadoSubte").append(row);
+                    $("#tablaEstadoSubte").append(row);
+                });
             });
-        });
 
-    });
-</script>
+        });
+    </script>
 }
