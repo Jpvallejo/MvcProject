@@ -1,0 +1,84 @@
+
+<!--
+    "id": 7778796,
+    "name": "Moreno",
+    "country": "AR",
+    "coord": 
+      "lon": -58.791382,
+      "lat": -34.63401
+
+    "id": 6559994,
+    "name": "Buenos Aires",
+    "country": "PE",
+    "coord": 
+      "lon": -78.497498,
+      "lat": -9.12417
+-->
+
+<div style="margin-top:2%;">
+    <table id="tablaEstadoSubte">
+        <thead>
+            <tr>
+                <td class="tdHeader">
+                    Temperatura
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            var urlAction = "https://samples.openweathermap.org/data/2.5/find?q=London&units=metric&appid=b6907d289e10d714a6e88b30761fae22";
+            var xhr = createCORSRequest('GET', urlAction);
+            xhr.setRequestHeader(
+                'Access-Control-Allow-Origin', 'true');
+            xhr.send();
+            $.getJSON(urlAction, function (data) {
+                $.each(data, function(item){
+                    var row = `<tr><td>${item.main.temp}</td></tr>`;
+
+                    $("#tablaEstadoSubte").append(row);
+                });
+            });
+
+            // $.ajax({
+            //     dataType: "json",
+            //     type: 'POST',
+            //     url: urlAction,
+            //     headers: {
+            //         'Access-Control-Allow-Origin': '*'
+            //     },
+            //     success: function(item){
+            //         var row = `<tr><td>Moreno</td><td>${item.main.temp}</td></tr>`;
+
+            //         $("#tablaEstadoSubte").append(row);
+            //     }
+            // });
+
+        });
+
+        // Create the XHR object.
+        function createCORSRequest(method, url) {
+            var xhr = new XMLHttpRequest();
+            
+            if ("withCredentials" in xhr) {
+                // XHR for Chrome/Firefox/Opera/Safari.
+                xhr.open(method, url, true);
+            } else if (typeof XDomainRequest != "undefined") {
+                // XDomainRequest for IE.
+                xhr = new XDomainRequest();
+                xhr.open(method, url);
+            } else {
+                // CORS not supported.
+                xhr = null;
+            }
+
+            return xhr;
+            
+        }
+    </script>
+}

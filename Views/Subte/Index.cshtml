@@ -43,7 +43,7 @@
             //$.getJSON("https://haysubte.now.sh/api", function (data) {
                 $.getJSON(urlAction, function (data) {
                     $.each(data, function(i, item){
-                        var row = `<tr><td><img src='/images/${i}.png' /></td><td><i class="fas fa-circle" style="${item.status=='normal' ? 'color:green' : 'color:orange'};"></i></td><td>${item.text}</td><td>`;
+                        var row = `<tr><td><img src='/images/${i}.png' /></td><td><i class="fas fa-circle" style="${item.status=='normal' ? 'color:green' : 'color:orange'};"></i></td><td>${item.text}</td><td></tr>`;
 
                     $("#tablaEstadoSubte").append(row);
                 });
